@@ -1,7 +1,7 @@
-import TyomatkaetuLaskelma from "./TyomatkaetuLaskelma";
+import AutoetuLaskelma from "./AutoetuLaskelma";
 
 function App() {
-  return <TyomatkaetuLaskelma />;
+  return <AutoetuLaskelma />;
 }
 
 export default App;
