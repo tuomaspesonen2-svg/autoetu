@@ -333,7 +333,7 @@ cursor: "pointer", transition: "all 0.2s",
 </div>
 
 {/* Comparison cards */}
-<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
+<div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 12, marginBottom: 16 }}>
 <div style={{ ...card, background: SAND, boxShadow: "none" }}>
 <div style={{ fontFamily: BODY, fontSize: 12, fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: MUTED, marginBottom: 12 }}>Palkankorotus</div>
 <div style={{ fontSize: 12, color: MUTED, marginBottom: 4 }}>Työnantaja maksaa /kk</div>
@@ -363,7 +363,7 @@ cursor: "pointer", transition: "all 0.2s",
 {/* Summary */}
 <div style={{ background: `linear-gradient(135deg, ${BRAND} 0%, ${NAVY_2} 100%)`, borderRadius: 12, padding: 22, color: "#fff", marginBottom: 16 }}>
 <div style={{ fontFamily: BODY, fontSize: 12, fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", marginBottom: 14 }}>Yhteenveto</div>
-<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+<div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 16, marginBottom: 16 }}>
 <div>
 <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", marginBottom: 4 }}>Työnantaja säästää /kk</div>
 <div style={{ fontFamily: HEAD, fontSize: 22, fontWeight: 800, letterSpacing: "-.02em", color: calc.employerSavingsMonth >= 0 ? GREEN_SOFT : RED_SOFT_DARK }}>{fmt(calc.employerSavingsMonth)} €</div>
