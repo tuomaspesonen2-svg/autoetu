@@ -88,6 +88,8 @@ const sliderCSS = `
   box-shadow:0 2px 6px rgba(13,38,63,.25); }
 .vl-range::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background:${ACCENT};
   cursor:pointer; border:3px solid #fff; box-shadow:0 2px 6px rgba(13,38,63,.25); }
+
+@media(max-width:600px){ div[style*="minmax(0"]{grid-template-columns:1fr !important} div[style*="minmax(0"]>div{text-align:center !important} }
 `;
 
 const labelStyle = { fontFamily: BODY, fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: MUTED };
