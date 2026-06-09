@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 
 /* Verologia-laskuri – sivuston design-järjestelmä (Bricolage Grotesque + Inter) */
 const BRAND = "#0D263F";
@@ -89,7 +89,7 @@ const sliderCSS = `
 .vl-range::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background:${ACCENT};
   cursor:pointer; border:3px solid #fff; box-shadow:0 2px 6px rgba(13,38,63,.25); }
 
-@media(max-width:600px){ div[style*="minmax(0"]{grid-template-columns:1fr !important} div[style*="minmax(0"]>div{text-align:center !important} }
+@media(max-width:760px){ div[style*="minmax(0"]{grid-template-columns:1fr !important} div[style*="minmax(0"]>div{text-align:center !important} }
 `;
 
 const labelStyle = { fontFamily: BODY, fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: MUTED };
@@ -178,8 +178,20 @@ employerSavingsMonth, employerSavingsYear, employeeGainMonth, employeeGainYear, 
 const maxBar = Math.max(calc.employerCostSalary, calc.employerCostBenefit, employerCost);
 const card = { background: "#fff", borderRadius: 12, padding: 18, border: `1px solid ${LINE}`, boxShadow: "0 10px 30px -16px rgba(28,40,30,.22)" };
 
+const rootRef = useRef(null);
+const [narrow, setNarrow] = useState(false);
+useEffect(() => {
+const el = rootRef.current;
+if (!el || typeof ResizeObserver === "undefined") return;
+const ro = new ResizeObserver((entries) => { setNarrow(entries[0].contentRect.width < 560); });
+ro.observe(el);
+return () => ro.disconnect();
+}, []);
+const cols2 = narrow ? "1fr" : "minmax(0,1fr) minmax(0,1fr)";
+const ctr = narrow ? "center" : "left";
+
 return (
-<div style={{ minHeight: "100vh", background: WARM, fontFamily: BODY, color: "#14202E" }}>
+<div ref={rootRef} style={{ minHeight: "100vh", background: WARM, fontFamily: BODY, color: "#14202E" }}>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>{sliderCSS}</style>
@@ -335,7 +347,7 @@ cursor: "pointer", transition: "all 0.2s",
 </div>
 
 {/* Comparison cards */}
-<div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 12, marginBottom: 16 }}>
+<div style={{ display: "grid", gridTemplateColumns: cols2, textAlign: ctr, gap: 12, marginBottom: 16 }}>
 <div style={{ ...card, background: SAND, boxShadow: "none" }}>
 <div style={{ fontFamily: BODY, fontSize: 12, fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: MUTED, marginBottom: 12 }}>Palkankorotus</div>
 <div style={{ fontSize: 12, color: MUTED, marginBottom: 4 }}>Työnantaja maksaa /kk</div>
@@ -365,7 +377,7 @@ cursor: "pointer", transition: "all 0.2s",
 {/* Summary */}
 <div style={{ background: `linear-gradient(135deg, ${BRAND} 0%, ${NAVY_2} 100%)`, borderRadius: 12, padding: 22, color: "#fff", marginBottom: 16 }}>
 <div style={{ fontFamily: BODY, fontSize: 12, fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", marginBottom: 14 }}>Yhteenveto</div>
-<div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 16, marginBottom: 16 }}>
+<div style={{ display: "grid", gridTemplateColumns: cols2, textAlign: ctr, gap: 16, marginBottom: 16 }}>
 <div>
 <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", marginBottom: 4 }}>Työnantaja säästää /kk</div>
 <div style={{ fontFamily: HEAD, fontSize: 22, fontWeight: 800, letterSpacing: "-.02em", color: calc.employerSavingsMonth >= 0 ? GREEN_SOFT : RED_SOFT_DARK }}>{fmt(calc.employerSavingsMonth)} €</div>
